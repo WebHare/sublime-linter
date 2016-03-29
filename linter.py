@@ -18,7 +18,7 @@ from WebHare.EditorSupport import EditorSupportCall, getViewStoredData
 class Hslint(Linter):
     """Provides an interface to hslint."""
 
-    syntax = 'harescript'
+    syntax = ('harescript','xml','witty')
     cmd = None # No command, running inline
     executable = None # No executable, running inline
     version_args = '--version'
