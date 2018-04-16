@@ -18,12 +18,7 @@ from WebHare.EditorSupport import EditorSupportCall, getViewStoredData
 class Hslint(Linter):
     """Provides an interface to hslint."""
 
-    syntax = ('harescript','xml','witty')
     cmd = None # No command, running inline
-    executable = None # No executable, running inline
-    version_args = '--version'
-    version_re = r'(?P<version>\d+\.\d+\.\d+)'
-    version_requirement = '>= 1.0'
     regex = (
         r'^(?:(?P<error>[E])|(?P<warning>[W])):'
         r'?:(?P<line>\d+):(?P<col>\d+):'
@@ -33,14 +28,10 @@ class Hslint(Linter):
     line_col_base = (1, 1)
     tempfile_suffix = None
     error_stream = util.STREAM_BOTH
-    selectors = {
-        'harescript': 'source.harescript'
-    }
     word_re = None
-    defaults = {}
-    inline_settings = None
-    inline_overrides = None
-    comment_re = r'\s*/[/*]'
+    defaults = {
+        'selector': 'source.harescript, source.witty, text.xml'
+    }
 
     """Run the linter, return a string with one error/warning per line"""
     def run(self, cmd, code):
