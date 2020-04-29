@@ -98,4 +98,4 @@ class Hslint(Linter):
         """ Convert UTF-8 bytes received from the compiler to characters used by Sublime Text """
         point = self.view.text_point(line - 1, col - 1)
         contents = self.view.substr(self.view.line(point))
-        return len(contents.encode('utf-8')[:col].decode('utf-8'))
+        return len(contents.encode('utf-8')[:col - 1].decode('utf-8')) + 1
