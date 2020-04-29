@@ -67,6 +67,8 @@ class Hslint(Linter):
                     if not obj["istopfile"]:
                         obj["line"] = 1
                         obj["col"] = 1
+                    else:
+                        obj["col"] = self.colBytesToCharacters(obj["line"], obj["col"])
 
                     lines.append(obj["line"])
                     messages.append(obj)
@@ -79,6 +81,8 @@ class Hslint(Linter):
                     if not obj["istopfile"]:
                         obj["line"] = 1
                         obj["col"] = 1
+                    else:
+                        obj["col"] = self.colBytesToCharacters(obj["line"], obj["col"])
 
                     lines.append(obj["line"])
                     messages.append(obj)
@@ -89,3 +93,9 @@ class Hslint(Linter):
             data["supported"] = False
 
         return lintresult
+
+    def colBytesToCharacters(self, line, col):
+        """ Convert UTF-8 bytes received from the compiler to characters used by Sublime Text """
+        point = self.view.text_point(line - 1, col - 1)
+        contents = self.view.substr(self.view.line(point))
+        return len(contents.encode('utf-8')[:col].decode('utf-8'))
