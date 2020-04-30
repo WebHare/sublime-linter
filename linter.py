@@ -67,7 +67,7 @@ class Hslint(Linter):
                     if not obj["istopfile"]:
                         obj["line"] = 1
                         obj["col"] = 1
-                    else:
+                    elif obj["col"] > 1:
                         obj["col"] = self.colBytesToCharacters(obj["line"], obj["col"])
 
                     lines.append(obj["line"])
@@ -81,7 +81,7 @@ class Hslint(Linter):
                     if not obj["istopfile"]:
                         obj["line"] = 1
                         obj["col"] = 1
-                    else:
+                    elif obj["col"] > 1:
                         obj["col"] = self.colBytesToCharacters(obj["line"], obj["col"])
 
                     lines.append(obj["line"])
